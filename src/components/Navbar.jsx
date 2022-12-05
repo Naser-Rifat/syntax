@@ -10,6 +10,7 @@ import Toolbar from "@mui/material/Toolbar";
 import * as React from "react";
 import { Fragment } from "react";
 import { Link } from "react-router-dom";
+import { useStateContext } from "../Contexts/ContextProvider";
 import Sidebar from "./Sidebar";
 const drawerWidth = 240;
 

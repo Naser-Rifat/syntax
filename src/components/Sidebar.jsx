@@ -1,6 +1,7 @@
+import { Dashboard } from "@mui/icons-material";
+import CloseOutlinedIcon from "@mui/icons-material/CloseOutlined";
 import { Box, Typography } from "@mui/material";
 import { Fragment } from "react";
-import { MdDashboard, MdOutlineCancel } from "react-icons/md";
 import { NavLink } from "react-router-dom";
 import { useStateContext } from "../Contexts/ContextProvider";
 const Sidebar = () => {
@@ -40,16 +41,16 @@ const Sidebar = () => {
               }}
             />
             <Typography variant="h6" className="dark:text-neutral">
-              Digital Menu_Card
+              dsfdsf
             </Typography>
           </Box>
           <button
             type="button"
             onClick={() => setActiveMenu(!activeMenu)}
-            style={{ color: currentColor }}
+            // style={{ color: currentColor }}
             className="text-xl rounded-full p-3 hover:bg-light-gray mt-4 block lg:hidden "
           >
-            <MdOutlineCancel />
+            <CloseOutlinedIcon />
           </button>
         </Box>
         <div className="mt-5">
@@ -61,7 +62,7 @@ const Sidebar = () => {
             })}
             className={({ isActive }) => (isActive ? activeLink : normalLink)}
           >
-            <MdDashboard />
+            <Dashboard />
             <span className="capitalize ">dashboard</span>
           </NavLink>
         </div>
