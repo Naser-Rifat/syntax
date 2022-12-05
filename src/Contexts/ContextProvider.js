@@ -3,15 +3,13 @@ import useFirebase from "../Auth/useFirebase/useFirebase";
 
 const StateContext = createContext();
 
-
-
 export const ContextProvider = ({ children }) => {
-  const firebaseContext=useFirebase()
+  const firebaseContext = useFirebase();
+  console.log(firebaseContext);
 
   const [activeMenu, setActiveMenu] = useState(true);
   const [screenSize, setScreenSize] = useState(undefined);
   const [expandedMenu, setExpandedMenu] = useState(true);
-
 
   useEffect(() => {
     const handleResize = () => setScreenSize(window.innerWidth);
@@ -42,13 +40,11 @@ export const ContextProvider = ({ children }) => {
       value={{
         firebaseContext,
         expandedMenu,
-      
+
         activeMenu,
         screenSize,
         setScreenSize,
         setActiveMenu,
-       
-       
       }}
     >
       {children}
