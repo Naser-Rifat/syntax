@@ -13,9 +13,6 @@ function App() {
   const {
     firebaseContext: { admin, user },
   } = useStateContext();
-  console.log(user);
-  console.log(admin);
-  Boolean(sessionStorage.getItem("admin"));
 
   const routes = [
     {
@@ -24,13 +21,7 @@ function App() {
     },
     {
       path: "/login",
-      element:
-        localStorage.getItem("admin") === "false" &&
-        localStorage.getItem("user") === "false" ? (
-          <Login />
-        ) : (
-          <LandingPage />
-        ),
+      element: <Login />,
     },
     {
       path: "/register",
@@ -38,11 +29,12 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: localStorage.getItem("admin")==="true" ? (
-        <NavLayout />
-      ) : (
-        <Navigate to="/login" />
-      ),
+      element:
+        localStorage.getItem("admin") === "true" ? (
+          <NavLayout />
+        ) : (
+          <Navigate to="/login" />
+        ),
       children: [{ path: "", element: <AddServices /> }],
     },
     {
