@@ -1,5 +1,5 @@
 import * as React from "react";
-import { useRoutes } from "react-router-dom";
+import { Navigate, useRoutes } from "react-router-dom";
 import "./App.css";
 import Login from "./Auth/Login/Login";
 import Register from "./Auth/Register/Register";
@@ -13,7 +13,9 @@ function App() {
   const {
     firebaseContext: { admin },
   } = useStateContext();
-  console.log(admin);
+
+  Boolean(sessionStorage.getItem("admin"));
+
   const routes = [
     {
       path: "/",
@@ -29,8 +31,12 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: <NavLayout />,
-      children: [{ path: "add", element: <AddServices /> }],
+      element: Boolean(sessionStorage.getItem("admin")) ? (
+        <NavLayout />
+      ) : (
+        <Navigate to="/login" />
+      ),
+      children: [{ path: "addservices", element: <AddServices /> }],
     },
     {
       path: "*",

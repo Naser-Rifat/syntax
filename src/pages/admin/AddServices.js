@@ -22,7 +22,6 @@ const AddServices = () => {
     <div>
       <Container style={{ marginTop: "50px", margin: " 0 auto" }}>
         <Typography style={{ marginTop: "50px" }} variant="h3">
-          {" "}
           Add Services
         </Typography>
         <Grid container spacing={2}>
@@ -33,30 +32,19 @@ const AddServices = () => {
             md={8}
           >
             <form onSubmit={handleSubmit(onSubmit)}>
-              {/* <TextField placeholder="Username" type="text" variant="standard" style={{ width: "80%", margin: "10px" }} defaultValue={user?.displayName} {...register("username")} />
-                            <TextField placeholder="Email" type="email" variant="standard" style={{ width: "80%", margin: "10px" }} defaultValue={user?.email} {...register("email")} /> */}
-
-              <TextField
-                placeholder="Price"
-                type="number"
-                variant="standard"
-                style={{ width: "80%", margin: "10px" }}
-                {...register("price")}
-              />
-
               <TextField
                 placeholder="Img-Url"
                 type="url"
                 variant="standard"
-                style={{ width: "80%", margin: "10px" }}
+                sx={{ width: "80%", marginY: "10px" }}
                 {...register("img")}
               />
 
               <TextField
-                placeholder="Bicycle-Modle"
+                placeholder="Service label"
                 type="text"
                 variant="standard"
-                style={{ width: "80%", margin: "10px" }}
+                sx={{ width: "80%", marginY: "10px" }}
                 {...register("label")}
               />
               <textarea
@@ -67,7 +55,8 @@ const AddServices = () => {
                   width: "80%",
                   height: "100px",
                   padding: "5px",
-                  margin: "10px auto",
+                  marginTop: "10px",
+                  border: "1px solid #000",
                 }}
                 {...register("description", { required: true })}
               />
@@ -75,7 +64,7 @@ const AddServices = () => {
               <Button
                 variant="contained"
                 type="submit"
-                style={{
+                sx={{
                   width: "80%",
                   background: "#7362F9",
                   margin: "0 auto",

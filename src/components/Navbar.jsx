@@ -94,7 +94,9 @@ const Navbar = () => {
         <Toolbar
           sx={{
             justifyContent: "space-between",
-            bgcolor: "#33373e",
+            bgcolor: "#fff",
+            borderBottom: 1,
+            borderColor: "#000",
           }}
         >
           <Box className="flex justify-between items-center">

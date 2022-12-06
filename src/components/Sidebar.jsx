@@ -13,10 +13,10 @@ const Sidebar = () => {
   };
 
   const activeLink =
-    "flex  items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-neutral  text-md m-2";
+    "flex  items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg  text-gray-50  text-md m-2";
 
   const normalLink =
-    "flex  items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-gray-700 dark:text-gray-200 dark:hover:text-black hover:bg-light-gray m-2";
+    "flex  items-center gap-5 pl-4 pt-3 pb-2.5 rounded-lg text-md text-neutral   m-2";
 
   return (
     <Box className="h-screen lg:overflow-hidden overflow-auto lg:hover:overflow-auto pb-10 bg-white dark:bg-main-dark-bg">
@@ -40,7 +40,7 @@ const Sidebar = () => {
                 width: "40px",
               }}
             />
-            <Typography variant="h6" className="dark:text-neutral">
+            <Typography variant="h6" className="text-neutral">
               dsfdsf
             </Typography>
           </Box>
@@ -55,15 +55,15 @@ const Sidebar = () => {
         </Box>
         <div className="mt-5">
           <NavLink
-            to="/addservices"
+            to="addservices"
             onClick={handleCloseSidebar}
             style={({ isActive }) => ({
-              backgroundColor: isActive ? "#0000" : "",
+              backgroundColor: isActive ? "#000" : "#000",
             })}
             className={({ isActive }) => (isActive ? activeLink : normalLink)}
           >
             <Dashboard />
-            <span className="capitalize ">Add services</span>
+            <span className="capitalize text-gray-50">Add services</span>
           </NavLink>
         </div>
       </Fragment>

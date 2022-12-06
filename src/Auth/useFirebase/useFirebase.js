@@ -86,6 +86,7 @@ const useFirebase = () => {
       .then((res) => res.json())
       .then((data) => {
         setAdmin(data.admin);
+        sessionStorage.setItem("admin",data.admin)
       });
     // .catch((error) => {
     //     setError(error.message);
