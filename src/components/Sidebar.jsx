@@ -55,7 +55,7 @@ const Sidebar = () => {
         </Box>
         <div className="mt-5">
           <NavLink
-            to=""
+            to="/addservices"
             onClick={handleCloseSidebar}
             style={({ isActive }) => ({
               backgroundColor: isActive ? "#0000" : "",
@@ -63,7 +63,7 @@ const Sidebar = () => {
             className={({ isActive }) => (isActive ? activeLink : normalLink)}
           >
             <Dashboard />
-            <span className="capitalize ">dashboard</span>
+            <span className="capitalize ">Add services</span>
           </NavLink>
         </div>
       </Fragment>

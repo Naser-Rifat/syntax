@@ -1,8 +1,11 @@
 import * as React from "react";
-import { Outlet, useRoutes } from "react-router-dom";
+import { useRoutes } from "react-router-dom";
 import "./App.css";
+import Login from "./Auth/Login/Login";
+import Register from "./Auth/Register/Register";
 import { useStateContext } from "./Contexts/ContextProvider";
 import NavLayout from "./layouts/NavLayout";
+import AddServices from "./pages/admin/AddServices";
 import { LandingPage } from "./pages/client/landingpage";
 import NotFound from "./pages/NotFound/NotFound";
 
@@ -17,12 +20,17 @@ function App() {
       element: <LandingPage />,
     },
     {
-      path: "/",
-      element: <LandingPage />,
+      path: "/login",
+      element: <Login />,
     },
     {
-      path: "/",
-      element: admin ? <NavLayout /> : <NavLayout />,
+      path: "/register",
+      element: <Register />,
+    },
+    {
+      path: "/dashboard",
+      element: <NavLayout />,
+      children: [{ path: "add", element: <AddServices /> }],
     },
     {
       path: "*",

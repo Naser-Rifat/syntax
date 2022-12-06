@@ -20,7 +20,7 @@ const useFirebase = () => {
   const auth = getAuth();
 
   // create an  user with email and password
-  const registerUser = (email, password, name, history) => {
+  const registerUser = (email, password, name, navigate) => {
     setIsLoading(true);
     createUserWithEmailAndPassword(auth, email, password)
       .then((result) => {
@@ -37,7 +37,7 @@ const useFirebase = () => {
             setError(error.message);
           });
         // setSuccess(true)
-        history.replace("/");
+        navigate("/dashboard");
       })
 
       .catch((error) => {
@@ -47,13 +47,17 @@ const useFirebase = () => {
   };
 
   // login with Email And Password
-  const loginUser = (email, password, location, history) => {
+  const loginUser = (email, password, location, navigate) => {
+    console.log(email, password, location, navigate);
     setIsLoading(true);
+    console.log("before login");
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
+        localStorage.setItem("admin", true);
         const destination = location?.state?.from || "/";
-        history.replace(destination);
+        navigate(destination);
         const user = result.user;
+        console.log(user);
         setUser(user);
         setSuccess(true);
         //    setIsLogin(true)
@@ -78,7 +82,7 @@ const useFirebase = () => {
   }, [auth]);
 
   useEffect(() => {
-    fetch(`https://peaceful-ravine-05762.herokuapp.com/users/${user?.email}`)
+    fetch(`http://localhost:5000/users/${user?.email}`)
       .then((res) => res.json())
       .then((data) => {
         setAdmin(data.admin);
@@ -102,7 +106,8 @@ const useFirebase = () => {
 
   const saveUser = (email, name, method) => {
     const user = { email, name };
-    fetch("https://peaceful-ravine-05762.herokuapp.com/users", {
+    console.log(user);
+    fetch("http://localhost:5000/users", {
       method: method,
       headers: {
         "content-type": "application/json",
