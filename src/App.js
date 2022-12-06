@@ -11,9 +11,10 @@ import NotFound from "./pages/NotFound/NotFound";
 
 function App() {
   const {
-    firebaseContext: { admin },
+    firebaseContext: { admin, user },
   } = useStateContext();
-
+  console.log(user);
+  console.log(admin);
   Boolean(sessionStorage.getItem("admin"));
 
   const routes = [
@@ -23,7 +24,13 @@ function App() {
     },
     {
       path: "/login",
-      element: <Login />,
+      element:
+        localStorage.getItem("admin") === "false" &&
+        localStorage.getItem("user") === "false" ? (
+          <Login />
+        ) : (
+          <LandingPage />
+        ),
     },
     {
       path: "/register",
@@ -31,12 +38,12 @@ function App() {
     },
     {
       path: "/dashboard",
-      element: Boolean(sessionStorage.getItem("admin")) ? (
+      element: localStorage.getItem("admin")==="true" ? (
         <NavLayout />
       ) : (
         <Navigate to="/login" />
       ),
-      children: [{ path: "addservices", element: <AddServices /> }],
+      children: [{ path: "", element: <AddServices /> }],
     },
     {
       path: "*",

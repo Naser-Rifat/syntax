@@ -1,8 +1,12 @@
 import { Button } from "@mui/material";
 import React from "react";
 import { Link } from "react-router-dom";
+import { useStateContext } from "../../Contexts/ContextProvider";
 
 const Header = () => {
+  const {
+    firebaseContext: { logOut },
+  } = useStateContext();
   return (
     <div>
       <div className="relative shadow bg-white">
@@ -75,13 +79,38 @@ const Header = () => {
                 </Link>
               </li>
               <li>
-                <Button
-                  sx={{ bgcolor: "#FF0000", color: "#ffff" }}
-                  className="capitalize bg-red-500 text-gray-200"
-                  to=""
+                <h1 className="text-gray-700">
+                  {localStorage.getItem("admin") === "true"
+                    ? "Admin"
+                    : localStorage.getItem("user") === "true"
+                    ? "User"
+                    : ""}
+                </h1>
+              </li>
+              <li>
+                {localStorage.getItem("user") === "true" && (
+                  <Button variant="outlined" onClick={logOut}>
+                    Logout
+                  </Button>
+                )}
+              </li>
+              <li>
+                <Link
+                  to={
+                    localStorage.getItem("admin") === "true" ? "/dashboard" : ""
+                  }
                 >
-                  Get Started
-                </Button>
+                  <Button
+                    variant="contained"
+                    sx={{ bgcolor: "#FF0000", color: "#ffff" }}
+                    className="capitalize bg-red-500 text-gray-200 hover:none"
+                    to=""
+                  >
+                    {localStorage.getItem("admin") === "true"
+                      ? "Go to Dashboard"
+                      : "Get Started "}
+                  </Button>
+                </Link>
               </li>
             </ul>
           </div>

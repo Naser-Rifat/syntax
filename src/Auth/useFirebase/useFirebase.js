@@ -7,6 +7,7 @@ import {
   updateProfile,
 } from "firebase/auth";
 import { useEffect, useState } from "react";
+import { Navigate } from "react-router-dom";
 import initializeAuthentication from "../Firebase/firebase.init";
 
 initializeAuthentication();
@@ -16,7 +17,6 @@ const useFirebase = () => {
   const [error, setError] = useState(false);
   const [isLoading, setIsLoading] = useState(true);
   const [success, setSuccess] = useState(false);
-
   const auth = getAuth();
 
   // create an  user with email and password
@@ -27,6 +27,7 @@ const useFirebase = () => {
         setError("");
         const newUser = { email, displayName: name };
         setUser(newUser);
+        localStorage.setItem("user", true);
         //  setIsLogin(true);
         saveUser(email, name, "POST");
         updateProfile(auth.currentUser, {
@@ -37,7 +38,7 @@ const useFirebase = () => {
             setError(error.message);
           });
         // setSuccess(true)
-        navigate("/dashboard");
+        navigate("/");
       })
 
       .catch((error) => {
@@ -53,12 +54,12 @@ const useFirebase = () => {
     console.log("before login");
     signInWithEmailAndPassword(auth, email, password)
       .then((result) => {
-        localStorage.setItem("admin", true);
         const destination = location?.state?.from || "/";
         navigate(destination);
         const user = result.user;
         console.log(user);
         setUser(user);
+        localStorage.setItem("user", true);
         setSuccess(true);
         //    setIsLogin(true)
       })
@@ -86,7 +87,7 @@ const useFirebase = () => {
       .then((res) => res.json())
       .then((data) => {
         setAdmin(data.admin);
-        sessionStorage.setItem("admin",data.admin)
+        localStorage.setItem("admin", data.admin);
       });
     // .catch((error) => {
     //     setError(error.message);
@@ -95,14 +96,19 @@ const useFirebase = () => {
 
   const logOut = () => {
     setIsLoading(true);
+    localStorage.setItem("user", false);
+    localStorage.setItem("admin", false);
     signOut(auth)
       .then(() => {
         // Sign-out successful.
+        <Navigate to="/login" />;
       })
       .catch((error) => {
         setError(error.message);
       })
-      .finally(() => setIsLoading(false));
+      .finally(() => {
+        setIsLoading(false);
+      });
   };
 
   const saveUser = (email, name, method) => {

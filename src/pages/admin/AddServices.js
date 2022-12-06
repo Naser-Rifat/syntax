@@ -10,9 +10,11 @@ const AddServices = () => {
   console.log(user);
   const { register, handleSubmit } = useForm();
   const onSubmit = (data) => {
-    axios.post("https://localhost:5000/services", data).then((res) => {
-      console.log(res);
-      if (res.data.insertedId) {
+    console.log(data);
+    axios.post("http://localhost:5000/services", data).then((res) => {
+      
+    
+      if (res?.data?.insertedId) {
         alert("inserted");
       }
     });

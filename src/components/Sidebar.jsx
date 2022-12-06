@@ -55,7 +55,7 @@ const Sidebar = () => {
         </Box>
         <div className="mt-5">
           <NavLink
-            to="addservices"
+            to=""
             onClick={handleCloseSidebar}
             style={({ isActive }) => ({
               backgroundColor: isActive ? "#000" : "#000",

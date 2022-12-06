@@ -1,6 +1,6 @@
 import ExpandMoreIcon from "@mui/icons-material/ExpandMore";
 import MenuIcon from "@mui/icons-material/Menu";
-import { Box, Menu } from "@mui/material";
+import { Box, Button, Menu } from "@mui/material";
 import MuiAppBar from "@mui/material/AppBar";
 import Divider from "@mui/material/Divider";
 import MuiDrawer from "@mui/material/Drawer";
@@ -74,7 +74,11 @@ const Drawer = styled(MuiDrawer, {
 }));
 
 const Navbar = () => {
-  const { activeMenu, setActiveMenu } = useStateContext();
+  const {
+    activeMenu,
+    setActiveMenu,
+    firebaseContext: { logOut },
+  } = useStateContext();
 
   const handleDrawerToggle = () => {
     setActiveMenu(!activeMenu);
@@ -132,7 +136,11 @@ const Navbar = () => {
               />
             </IconButton>
           </Box>
+
           <div className="flex items-center justify-between space-x-1">
+            <Button variant="contained" onClick={logOut}>
+              logOut
+            </Button>
             <div className="flex items-center gap-2 cursor-pointer p-1 hover:bg-light-gray rounded-lg">
               <img
                 className="rounded-full w-8 h-8"
